@@ -30,7 +30,8 @@
 %
 % To disable outputting page headers and footers, remove "runningheads"
 \documentclass[runningheads,a4paper,english]{llncs}[2022/01/12]
-
+\usepackage[margin=1.5in]{geometry}
+\usepackage{amsmath, amssymb, mathtools}
 \usepackage{iftex}
 
 % backticks (`) are rendered as such in verbatim environments.
@@ -542,19 +543,133 @@
   \input{glyphtounicode}
   \pdfgentounicode=1
 \fi
+
+% some personal latex commands (its not very clean, deal with it)
+\newcommand{\En}{\ensuremath{\mathbb{N}}}
+\newcommand{\Que}{\ensuremath{\mathbb{Q}}}
+\newcommand{\Ree}{\ensuremath{\mathbb{R}}}
+\newcommand{\Zee}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Kay}{\ensuremath{\mathbb{K}}}
+\newcommand{\Cee}{\ensuremath{\mathbb{C}}}
+\newcommand{\Tee}{\ensuremath{\mathbb{T}}}
+\newcommand{\Eff}{\ensuremath{\mathbb{F}}}
+\newcommand{\Ess}{\ensuremath{\mathbb{S}}}
+\newcommand{\Essp}{\ensuremath{\mathbb{S}_{+}}}
+\newcommand{\Esspp}{\ensuremath{\mathbb{S}_{++}}}
+\newcommand{\Reep}{\ensuremath{\mathbb{R}_+}}
+\newcommand{\Reepp}{\ensuremath{\mathbb{R}_{++}}}
+\newcommand{\Ach}{\ensuremath{\mathbb{H}}}
+
+\newcommand{\mbP}{\ensuremath{\mathbb{P}}}
+\newcommand{\mbA}{\ensuremath{\mathbb{A}}}
+
+\newcommand{\mcF}{\ensuremath{\mathcal{F}}}
+\newcommand{\mcP}{\ensuremath{\mathcal{P}}}
+\newcommand{\mcB}{\ensuremath{\mathcal{B}}}
+\newcommand{\mcA}{\ensuremath{\mathcal{A}}}
+\newcommand{\mcS}{\ensuremath{\mathcal{S}}}
+\newcommand{\mcH}{\ensuremath{\mathcal{H}}}
+\newcommand{\mcK}{\ensuremath{\mathcal{K}}}
+\newcommand{\mcC}{\ensuremath{\mathcal{C}}}
+\newcommand{\mcL}{\ensuremath{\mathcal{L}}}
+\newcommand{\mcG}{\ensuremath{\mathcal{G}}}
+\newcommand{\mcN}{\ensuremath{\mathcal{N}}}
+\newcommand{\mcQ}{\ensuremath{\mathcal{Q}}}
+
+\newcommand*{\eps}{\ensuremath{\epsilon}}
+
+\newcommand*{\one}{\text{\usefont{U}{bbold}{m}{n}1}}
+\newcommand{\zero}{\text{\usefont{U}{bbold}{m}{n}0}}
+
+\newcommand{\tnorm}[1]{|\!|\!|#1|\!|\!|}
+
+\newcommand{\wbar}[1]{\overline{#1}}
+
+\newcommand{\imps}{\Rightarrow}
+\newcommand{\Iff}{\Leftrightarrow}
+\newcommand{\limnfty}[1][n]{\lim_{#1\to\infty}}
+% \NewDocumentCommand{\limnfty}{O{n}}{\lim_{#1\to\infty}}
+\newcommand{\suminf}[1]{\sum_{#1=1}^{\infty}}
+\newcommand{\sumto}[2]{\sum_{#1=1}^{#2}}
+\newcommand{\seqnfty}[1][x]{(#1_n)_{n=1}^\infty}
+
+\newcommand{\taninv}{\tan^{-1}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\DeclareMathOperator*{\diam}{diam}
+\newcommand{\inv}[1]{#1^{-1}}
+
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Diag}{Diag}
+\DeclareMathOperator{\spr}{spr}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\ctrl}{c-}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\spann}{span}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\nullsp}{Null}
+\DeclareMathOperator{\ext}{ext}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\relint}{relint}
+\DeclareMathOperator{\Aff}{Aff}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiterX\ip[2]{\langle}{\rangle}{#1\,\delimsize\vert\,\mathopen{}#2}
+\DeclarePairedDelimiterX\op[2]{\lvert}{\rvert}{\mathopen{}#1\delimsize\rangle\delimsize\langle\mathopen{}#2}
+\newcommand{\opproj}[1]{\op{#1}{#1}}
+\DeclareMathOperator*{\QFT}{QFT}
+\DeclareMathOperator*{\Adv}{Adv}
+
+
+\newcommand{\ko}{\ket{0}}
+\newcommand{\ki}{\ket{1}}
+\newcommand{\koo}{\ket{00}}
+\newcommand{\koi}{\ket{01}}
+\newcommand{\kio}{\ket{10}}
+\newcommand{\kii}{\ket{11}}
+\newcommand{\cnot}{\textsc{cnot}}
+
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+% \newtheorem{definition}{Definition}[section]
+
 \begin{document}
 
-\title{Paper Title}
+\title{QIC 823 Final Project On Self-Testing of Quantum Systems}
 % If Title is too long, use \titlerunning
 %\titlerunning{Short Title}
 
 % Single insitute
-\author{Firstname Lastname \and Firstname Lastname}
+\author{Bert Sun}
 
 % If there are too many authors, use \authorrunning
 %\authorrunning{First Author et al.}
 
-\institute{Institute}
+\institute{University of Waterloo}
 
 %% Multiple insitutes - ALTERNATIVE to the above
 % \author{%
@@ -575,28 +690,37 @@
 \maketitle
 
 \begin{abstract}
-\lipsum[1]
+Following a survey paper on self-testing by \cite{selftest}, we examine self-testing of quantum systems as a tool for theorists to validate experimental implementations of quantum algorithms.
+We begin with a discussion on the merits and needs for such a protocol, followed by definitions and an example of self-testing in action.
+A brief discussion of connections with non-local games is given, along with generalizations of self-testing protocols allowing gates to be tested as well.
 
-\keywords{First keyword \and Second keyword \and Third keyword}
+
+% \keywords{First keyword \and Second keyword \and Third keyword}
 \end{abstract}
 
 
 \section{Introduction}
 \label{sec:introduction}
-\lipsum[1-3]\todo{Refine me}
+% \lipsum[1-3]\todo{Refine me}
 
-The remainder of the paper starts with a presentation of related work (\cref{sec:relatedwork}).
-It is followed by a presentation of hints on \LaTeX{} (\cref{sec:latexhints}).
-Finally, a conclusion is drawn and outlook on future work is made (\cref{sec:outlook}).
+% The remainder of the paper starts with a presentation of related work (\cref{sec:relatedwork}).
+% It is followed by a presentation of hints on \LaTeX{} (\cref{sec:latexhints}).
+% Finally, a conclusion is drawn and outlook on future work is made (\cref{sec:outlook}).
 
-\section{Related Work}
-\label{sec:relatedwork}
+% \section{Related Work}
+% \label{sec:relatedwork}
 
-Winery~\cite{Winery} is a graphical \textcomment{modeling}{modeling with one ``l'', because of American English} tool.
-The whole idea of TOSCA is explained by \citet{Binz2009}.
+% Winery~\cite{Winery} is a graphical \textcomment{modeling}{modeling with one ``l'', because of American English} tool.
+% The whole idea of TOSCA is explained by \citet{Binz2009}.
 
-\section{LaTeX Hints}
-\label{sec:latexhints}
+Quantum entanglement and non-local behaviours of quantum theory provide the basis for many quantum speedups over classical algorithmic counterparts.
+First shown by Bell in \cite{bell64}, quantum theory allows for correlations that cannot be explained by classical descriptors.
+By exploiting these uniquely quantum principles of entanglement and superposition, quantum devices can outperform the best classically known algorithms in a wide variety of tasks.
+In the current NISQ era of computing, however, current implementations such as factoring small numbers (like 21) have been criticized for knowing and expecting the correct answer beforehand.
+We will see that self-testing protocols provide explicit proof that any such implementation is indeed exploiting quantum behaviour.
+
+\section{Motivations and an Informal Approach to Self-Testing}
+\label{sec:motivations}
 
 % Required for proper example rendering in the compiled PDF
 \newcount\LTGbeginlineexample
@@ -631,358 +755,204 @@ The whole idea of TOSCA is explained by \citet{Binz2009}.
   }
 }%
 
-This section contains hints on writing LaTeX.
-It focuses on minimal examples, which can be directly adapted to the content
-
-\subsection{Handling of paragraphs}
-
-\begin{ltgexample}
-One sentence per line.
-This rule is important for the usage of version control systems.
-A new line is generated with a blank line.
-As you would do in Word:
-New paragraphs are generated by pressing enter.
-In LaTeX, this does not lead to a new paragraph as LaTeX joins subsequent lines.
-In case you want a new paragraph, just press enter twice!
-This leads to an empty line.
-In word, there is the functionality to press shift and enter.
-This leads to a hard line break.
-The text starts at the beginning of a new line.
-In LaTeX, you can do that by using two backslashes (\textbackslash\textbackslash).
-\\
-This is rarely used.
-
-Please do \textit{not} use two backslashes for new paragraphs.
-For instance, this sentence belongs to the same paragraph, whereas the last one started a new one.
-A long motivation for that is provided at \url{http://loopspace.mathforge.org/HowDidIDoThat/TeX/VCS/#section.3}.
-\end{ltgexample}
-
-\subsection{Notes separated from the text}
-
-The package mindflow enables writing down notes and annotations in a way so that they are separated from the main text.
-
-\begin{ltgexample}
-\begin{mindflow}
-This is a small note.
-\end{mindflow}
-\end{ltgexample}
-
-\subsection{Handling TODOs}
-
-\begin{ltgexample}
-\textmarker{Markierter Text.}
-\end{ltgexample}
-
-Bei \verb1\textmarker1 wird nur die Textfarbe geändert, da dies auch bei einigen Worten gut funktioniert.
-
-\begin{ltgexample}
-\textcomment{Markierter Text.}{Kommentar dazu.}
-\end{ltgexample}
-
-\begin{ltgexample}
-\modified{Manuelle Markierung für Text, der seit der letzten Version geändert wurde.}
-\end{ltgexample}
-
-\begin{ltgexample}
-Das ist ein Text.
-\change{FL1: Text angepasst}{Geänderter Text}.
-\end{ltgexample}
-
-\begin{ltgexample}
-Hier nur ein Kommentar\sidecomment{Kommentar}.
-\end{ltgexample}
-
-\begin{ltgexample}
-\todo{Hier muss noch kräftig Text produziert werden}
-\end{ltgexample}
-
-\subsection{Hyphenation}
-
-\LaTeX{} automatically hyphenates words.
-When using \href{https://ctan.org/pkg/microtype}{microtype}, there should be fewer hyphenations than in other settings.
-It might be necessary to tweak the hyphenations nevertheless.
-Here are some hints:
-
-\begin{ltgexample}
-In case you write \enquote{application-specific}, then the word will only be hyphenated at the dash.
-You can also write \verb1applica\allowbreak{}tion-specific1 (result: applica\allowbreak{}tion-specific), but this is much more effort.
-
-You can now write words containing hyphens which are hyphenated at other places in the word.
-For instance, \verb1application"=specific1 gets application"=specific.
-This is enabled by an additional configuration of the babel package.
-\end{ltgexample}
-
-\subsection{Typesetting Units}
-
-\begin{ltgexample}
-Numbers can be written plain text (such as 100), by using the \href{https://ctan.org/pkg/siunitx}{siunitx} package as follows:
-\SI{100}{\km\per\hour},
-or by using plain \LaTeX{} (and math mode):
-$100 \frac{\mathit{km}}{h}$.
-\end{ltgexample}
-
-\begin{ltgexample}
-\SI{5}{\percent} of \SI{10}{kg}
-\end{ltgexample}
-
-\begin{ltgexample}
-Numbers are automatically grouped: \num{123456}.
-\end{ltgexample}
-
-\subsection{Surrounding Text by Quotes}
-
-\begin{ltgexample}
-Please use the \enquote{enquote command} to quote something.
-Quoting with "`quote"' or ``quote'' also works.
-
-\end{ltgexample}
-
-\subsection{Cleveref examples}
-\label{sec:ex:cref}
-
-Cleveref demonstration: Cref at beginning of sentence, cref in all other cases.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=.75\linewidth]{example-image-a}
-  \caption{Example figure for cref demo}
-  \label{fig:ex:cref}
-\end{figure}
-
-\begin{table}
-  \centering
-  \begin{tabular}{ll}
-    \toprule
-    Heading1 & Heading2 \\
-    \midrule
-    One      & Two      \\
-    Thee     & Four     \\
-    \bottomrule
-  \end{tabular}
-  \caption{Example table for cref demo}
-  \label{tab:ex:cref}
-\end{table}
-
-\begin{ltgexample}
-\Cref{fig:ex:cref} shows a simple fact, although \cref{fig:ex:cref} could also show something else.
-
-\Cref{tab:ex:cref} shows a simple fact, although \cref{tab:ex:cref} could also show something else.
-
-\Cref{sec:ex:cref} shows a simple fact, although \cref{sec:ex:cref} could also show something else.
-\end{ltgexample}
-
-\subsection{Figures}
-
-\begin{ltgexample}
-\Cref{fig:label} shows something interesting.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=.8\linewidth]{example-image-golden}
-  \caption[Simple Figure]{
-    Simple Figure.
-    Based on \citet{mwe}.
-  }
-  \label{fig:label}
-\end{figure}
-\end{ltgexample}
-
-One can also have pictures floating inside text:
-\clearpage
-
-\begin{ltgexample}
-\begin{floatingfigure}{.33\linewidth}
-  \includegraphics[width=.29\linewidth]{example-image-a}
-  \caption{A floating figure}
-\end{floatingfigure}
-\lipsum[2]
-\end{ltgexample}
-
-\subsection{Sub Figures}
-
-An example of two sub figures is shown in \cref{fig:two_sub_figures}.
-
-\begin{ltgexample}
-\begin{figure}[!b]
-  \centering
-  \subfloat[Case I]{\includegraphics[width=.4\linewidth]{example-image-a}%
-    \label{fig:first_case}}
-  \hfil
-  \subfloat[Case II]{\includegraphics[width=.4\linewidth]{example-image-b}%
-    \label{fig:second_case}}
-  \caption{Example figure with two sub figures.}
-  \label{fig:two_sub_figures}
-\end{figure}
-\end{ltgexample}
-
-\subsection{Tables}
-
-\begin{ltgexample}
-\begin{table}
-  \caption{Simple Table}
-  \label{tab:simple}
-  \centering
-  \begin{tabular}{ll}
-    \toprule
-    Heading1 & Heading2 \\
-    \midrule
-    One      & Two      \\
-    Thee     & Four     \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-\end{ltgexample}
-
-\begin{ltgexample}
-% Source: https://tex.stackexchange.com/a/468994/9075
-\begin{table}
-  \caption{Table with diagonal line}
-  \label{tab:diag}
-  \begin{center}
-    \begin{tabular}{|l|c|c|}
-      \hline
-      \diagbox[width=10em]{Diag \\Column Head I}{Diag Column\\Head II} & Second & Third \\
-      \hline
-       & foo & bar              \\
-      \hline
-    \end{tabular}
-  \end{center}
-\end{table}
-\end{ltgexample}
-
-
-\subsection{Source Code}
-
-\begin{ltgexample}
-\Cref{lst:XML} shows source code written in XML.
-\Cref{line:comment} contains a comment.
-
-\begin{lstlisting}[
-  language=XML,
-  caption={Example XML Listing},
-  label={lst:XML}]
-<listing name="example">
-  <!-- comment --> (* \label{line:comment} *)
-  <content>not interesting</content>
-</listing>
-\end{lstlisting}
-\end{ltgexample}
-
-One can also add \verb+float+ as parameter to have the listing floating.
-\Cref{lst:flXML} shows the floating listing.
-
-\begin{ltgexample}
-\begin{lstlisting}[
-  % one can adjust spacing here if required
-  % aboveskip=2.5\baselineskip,
-  % belowskip=-.8\baselineskip,
-  float,
-  language=XML,
-  caption={Example XML listing -- placed as floating figure},
-  label={lst:flXML}]
-<listing name="example">
-  Floating
-</listing>
-\end{lstlisting}
-\end{ltgexample}
-
-One can also typeset JSON as shown in \cref{lst:json}.
-
-\begin{ltgexample}
-\begin{lstlisting}[
-  float,
-  language=json,
-  caption={Example JSON listing -- placed as floating figure},
-  label={lst:json}]
-{
-  key: "value"
-}
-\end{lstlisting}
-\end{ltgexample}
-
-Java is also possible as shown in \cref{lst:java}.
-
-\begin{ltgexample}
-\begin{lstlisting}[
-  caption={Example Java listing},
-  label=lst:java,
-  language=Java,
-  float]
-public class Hello {
-    public static void main (String[] args) {
-        System.out.println("Hello World!");
-    }
-}
-\end{lstlisting}
-\end{ltgexample}
-
-\subsection{Itemization}
-
-One can list items as follows:
-
-\begin{ltgexample}
-\begin{itemize}
-  \item Item One
-  \item Item Two
-\end{itemize}
-\end{ltgexample}
-
-
-One can enumerate items as follows:
-
-\begin{ltgexample}
-\begin{enumerate}
-  \item Item One
-  \item Item Two
-\end{enumerate}
-\end{ltgexample}
-
-
-With paralist, one can even have all items typeset after each other and have them clean in the TeX document:
-
-\begin{ltgexample}
-\begin{inparaenum}
-  \item All these items...
-  \item ...appear in one line
-  \item This is enabled by the paralist package.
-\end{inparaenum}
-\end{ltgexample}
-
-\subsection{Other Features}
-
-\begin{ltgexample}
-The words \enquote{workflow} and \enquote{dwarflike} can be copied from the PDF and pasted to a text file.
-\end{ltgexample}
-
-\begin{ltgexample}
-The symbol for powerset is now correct: $\powerset$ and not a Weierstrass p ($\wp$).
-
-$\powerset({1,2,3})$
-\end{ltgexample}
-
-\begin{ltgexample}
-Brackets work as designed:
-<test>
-One can also input backticks in verbatim text: \verb|`test`|.
-\end{ltgexample}
-
-
-\section{Conclusion and Outlook}
-\label{sec:outlook}
-\lipsum[1-2]
-
-\subsubsection*{Acknowledgments}
-
-Identification of funding sources and other support, and thanks to individuals and groups that assisted in the research and the preparation of the work should be included in an acknowledgment section, which is placed just before the reference section in your document \cite{acmart}.
-
-%%% ===============================================================================
-%%% Bibliography
-%%% ===============================================================================
-
-In the bibliography, use \texttt{\textbackslash textsuperscript} for \enquote{st}, \enquote{nd}, \ldots:
-E.g., \enquote{The 2\textsuperscript{nd} conference on examples}.
-When you use \href{https://www.jabref.org}{JabRef}, you can use the clean up command to achieve that.
-See \url{https://help.jabref.org/en/CleanupEntries} for an overview of the cleanup functionality.
+From an information theorist's or algorithmic perspective, it does not matter whether the device implementing Grover search or Shor's factoring algorithm is utilizing trapped ions or photons.
+In a fully reductionist perspective, let us suppose that Ashwin and Bert wish to experimentally test an algorithm of their design with friends Carl and David in the laboratory.
+Since Bert knows no better than to not stare into a laser should he be given access to a lab, Carl and David decide it is best to keep Bert as far away from the lab as possible.
+Instead, Carl and David decide on various implementations which Bert may consider \textit{settings} to the experiment, and following perhaps some measurement and post-processing \textit{results}.
+
+In a particular motivating example, suppose that in Ashwin and Bert's work on quantum compression they wish to utilize a shared resource of entanglement between Carl and David.
+Verifying that such a shared resource is indeed entangled has practical applications in areas such as cryptography (such as in BB84 \cite{Bennett_2014}) where a user wishes to trust a minimal subset of the processes involved in their communication. 
+Carl and David may do this through quantum state tomography to learn the density matrix of the emitted states, which can be used to determine if it is entangled or not.
+Bert with his considerably smaller brain might not completely understand this process, but he knows from Bell's work in non-locality \cite{bell64} that with this shared source of entanglement he can ask Carl and David to play a game with him to verify non-classical properties of this shared resource.
+
+Bert can ask Carl and David to set up their labs in some setting $(x, y) \in \mcQ_C\times \mcQ_D$ where $\mcQ$ indexes some subset of possible settings, and produce predetermined answers $(c, d) \in \mcA_C \times \mcA_D$ where $\mcA$ indexes the results of running the experiment.
+By working Carl and David to the bone, Bert can estimate the probabilities $p(c,d | x,y)$.
+He can then compare the results of his estimates with as many Bell inequalities as he can find, and if any of them are violated then the shared resource between Carl and David must be entangled.
+In this setup, Bert can certify entanglement independently of the devices used to perform the experiment, and such procedures are called \textit{device-independent certifications of entanglement}.
+
+In a next step, we may even suppose that Ashwin and Bert require the shared resource to be of a particular form, say a classical description such as $\ket{\phi^+} = \frac{1}{\sqrt{2}}(\ket{00} + \ket{11})$.
+As they are insulated from the experimental setup, they are not even sure what it means for the physical system to be in a state described by $\ket{0}$.
+The procedure to verify and extract such a state is called a \textit{device-independent self-test} of the state.
+It will be seen later on that the procedures and correlations required will be in general, state-dependent.
+
+Ashwin and Bert may further realize that due to noise in the lab setups and statistical error in estimating correlations they can never hope to exactly self-test a state.
+Any practical application of self-testing must then employ noise-resistant techniques in the lab, and statistical analysis techniques in probability estimation in a \textit{robust self-test}.
+
+One might wonder why the question is framed in a way such that Carl and David must run experiments individually and without communication.
+If the setup were to be posed in a unipartite environment, then it could always be the case that the state and measurements on it are simulated classically.
+It is then paramount to self-testing that there is a non-local separation to exploit non-local games to distinguish between classical and quantum behaviour.
+
+\section{Definitions}
+\subsection{Notation}
+Throughout we let $\mcL(\mcH)$ denote the set of linear operators on some Hilbert space $\mcH$.
+We allow subscripts to denote the party which some Hilbert space may be associated to as in $\mcH_C$
+and also to denote the space in which a state lives or operator acts \eg $\ket{\psi}_A \in \mcH_C$
+
+\subsection{Self-Testing of States}
+For Carl to produce outcomes associated to his answer set $a \in \mcA_C$, Carl must perform some measurement characterized by a family of projectors $M_{c|x} \in \mcL(\mcH_C)$.
+Note that Naimark dilation allows any POVM to be implemented as a projective measurement in an augmented reference system.
+These projectors furthermore satisfy the conditions:
+\[M_{c|x} \succeq 0 \,\forall x, a, \text{ and for fixed } x, \sum_c M_{c|x} = \one_C\]
+If Carl and David share some possibly mixed state $\rho_{CD} \in \mcL(\mcH_C \otimes \mcH_D)$, this can be purified with respect to some enviroment such that:
+\[\rho_{CD} = \tr_E(\ket{\psi}_CDE),\qquad p(c,d|x, y) = \bra{\psi}(M_{c|x} \otimes N_{d|y} \otimes \one_E)\ket{\psi}_{CDE}\]
+If given some self-testing setup with measurements $\{M_{c|x}\}, \{N_{d|y}\}$ it is also important that subject to local unitaries $U, V$ the measurements $\{UM_{c|x}U^\dagger\}, \{VN_{d|y}V^\dagger\}$ will generate the same correlations.
+This means that we can only certify the state up to a local unitary $U_C \otimes V_D$.
+Additionally, by extending the measurement operators to act trivially on an ancilla register we similarly cannot distinguish between say $\ket{\psi}_{CD}$ and $\ket{\psi}_{CD}\otimes \ket{0^n}_A$
+
+\begin{definition}
+  We say that the correlations $p(c,d|x,y)$ self-test a state $\ket{\psi}_{CD}$ if for any state $\rho_{C'D'}$ for which there exist compatible measurements $\{M_{c|x}\}, \{N_{d|y}\}$ (compatible meaning producing the correlations $p(c,d|x,y)$),
+  there exists local isometries $\Phi_{R'} : \mcH_{R'} \to \mcH_{R\bar{R}}$ for $R \in \{C, D\}$
+  such that for any purification $\ket{\psi'}_{C'D'E}$ of $\rho_{C'D'}$ the following holds:
+  \[\Phi_C \otimes \Phi_D \otimes \one_E \ket{\psi'}_{C'D'E} = \ket{\psi}_{CD} \otimes \ket{\xi}_{\bar{C}\bar{D}E}\]
+  Where $\ket{\xi}_{\bar{C}\bar{D}E}$ is some junk state.
+\end{definition}
+In practice the local isometries can be given an explicit descriptor with respect to the observables.
+With such an explicit descriptor the above definition should be interpreted as allowing us to ``extract'' the state $\ket{\psi}$ by having Carl and David perform local operations.
+
+\subsection{Self-Testing of Measurements}
+Oftentimes the outcome of a quantum algorithm is dependent on the measurement outcome with respect to an initial input state.
+If we are able to self-test this initial input state, the natural extension is to being able to self-test the experimental measurements which implement the theoretically called for measurements.
+\begin{definition}
+  Say the correlations $p(c,d|x,y)$ self-test the state $\ket{\psi}_{CD}$ and measurements $\{M_{c|x}\}, \{N_{d|y}\}$ if for any state $\rho_{C'D'}$ and compatible measurements $\{M'_{c|x}\}, \{N'_{d|y}\}$,
+  there exist local isometries which for any purification $\ket{\psi'}_{C'D'E}$ of $\rho_{C'D'}$ satisfy:
+  \[\Phi_C\otimes \Phi_D \otimes \one_E \left[M'_{c|x} \otimes N'_{d|y} \otimes \one_E \ket{\psi'}_{C'D'E}\right]
+    = \left(M_{c|x} \otimes N_{d|y} \ket{\psi}_{CD}\right) \otimes \ket{\xi}_{\bar{C}\bar{D}E}\]
+  For every $c,d,x,y$ and some junk state $\ket{\xi}_{\bar{C}\bar{D}E}$ independent of $c,d,x,y$.
+\end{definition}
+This definition should then be understood in the context of the previous definition that up to local isometries,
+we may extract the state we wish to self-test for and verify that the experimental measurements on this extracted state correctly model the theoretical measurements called for.
+
+\subsection{Robust Self-Testing}
+Realistically, due to experimental noise and statistical error, perfect self-tests as defined above are impossible.
+One can still hope, however, to achieve an approximate extraction of the tested state.
+If we allow ourselves some error $\eps$ in this extraction, then we may make the following definition:
+\begin{definition}
+  Say the correlations $p(c,d|x,y)$ self-test the state $\ket{\psi}_{AB}$ with fidelity $1-\eps$ if for any state $\rho_{A'B'}$ and measurements compatible with $p$, there is a local isometry $\Phi = \Phi_C \otimes \Phi_D$ for which
+  \[F\left( \ket{\psi}_{AB}, \tr_{\bar{C}\bar{D}}(\Phi\rho_{A'B'})\right) \ge 1-\eps\]
+\end{definition}
+This definition above should be read as:
+If the above exact self-testing protocols allow one to construct local isometries to extract the state $\ket{\psi}$ exactly,
+then the robust protocol allows one to extract an approximation $\ket{\psi}$.
+
+\section{An Example}
+Following the initial motivation, suppose we would like to derive a self-test for the Bell state 
+\[\ket{\phi^+} \coloneq \frac{1}{\sqrt{2}}(\koo + \kii)\]
+Many results relating to a maximal violation of Bell inequalities using this state have been shown, for example by Tsirelson in \cite{tsirelson1993some}.
+Here we suppose that $\mcA_C = \mcA_D = \{+,-\}$ and $\mcQ_C = \mcQ_D = \{0,1\}$.
+Of course in the general case it may be neccesary to have a more complex set of questions and observables, but we will see that in this simple setting we may find a correlation self-testing for $\ket{\phi^+}$.
+If we assume the answers are indexed by numbers, then relating to the measurements $\{M_{c|x}\}$ and $\{N_{d|y}\}$ we may in general define observables:
+\[C_x \coloneq \sum_{c} cM_{c|x}, \qquad D_y \coloneq \sum_{d} dN_{d|y}\]
+In our specific setting, this corresponds to
+\[C_x = M_{+|x} - M_{-|x}, \qquad D_y = N_{+|y} - N_{-|y}\]
+For $x, y \in \{0,1\}$.
+Since we are assuming that all measurements are projective, the operators $C_x, D_y$ will be Hermitian.
+In particular, they will also satisfy
+\[C_x^2 = D_y^2 = \one\]
+In our specific restriction of the answer set to only $\pm 1$ the eigenvalues of these operators lie on the unit circle and thus correspond to unitary operators. 
+
+In being Hermitian we may talk about the expectation value of these operators with respect to some state $\ket{\psi}$.
+Note that the expectation value correspond to correlations $p(c,d|x,y)$ by
+\[\bra{\psi}C_x D_y\ket{\psi} = \sum_{c,d} cd\cdot p(c,d|x,y)\]
+Using the CHSH Bell inequality given in \cite{clauser1969proposed}, any classical (separable) state gives:
+\[\beta_{\text{CHSH}} = \sum_{x, y \in \{0,1\}} (-1)^{xy} \langle C_x D_y\rangle \le 2\]
+But using the Bell state $\ket{\phi^+}$ leads to a maxial violation of $\beta_{\text{CHSH}} = 2\sqrt{2}$.
+Explicitly, this is done by Carl and David measuring anticommuting observables where we may take:
+\[C_0 = \sigma_x, C_1 = \sigma_Z, D_0 = (\sigma_X + \sigma_Z)/\sqrt{2}, D_1 = (\sigma_X - \sigma_Z)/\sqrt{2}\]
+Tsirelson (and many others) show that in fact the maximal violation of $2\sqrt{2}$ can only be achieved by such a maximally entangled state.
+
+In the self-testing setup we of course do not have access to these explicit descriptors, but rather a black box of measurements $M_{\pm|b}, N_{\pm|b}$ where $b\in \{0,1\}$ for which on some state $\rho_{CD}$ derive correlations which violate the CHSH inequality maximally.
+Understanding that $\rho_{CD}$ may be purified we work with a pure state $\ket{\phi}_{CDE}$ instead, and that the measurements take place only on Carl and David's accessable portions respectively.
+
+We first show that the operators which maximally violate the CHSH inequality must anticommute.
+This requires the knowledge that:
+\begin{equation}\label{eq:1}
+  \bra{\psi}C_xD_y\ket{\psi} = \frac{(-1)^{xy}}{\sqrt{2}}
+\end{equation}
+Allow us to define the following vectors:
+\[\ket{c_0} = \frac{1}{\sqrt{2}}(C_0+C_1)\ket{\psi}, \ket{c_1} = \frac{1}{\sqrt{2}}(C_0-C_1)\ket{\psi},
+\ket{d_0} = D_0\ket{\psi}, \ket{d_1}=D_1\ket{\psi}\]
+By expanding definitions and applying \eqref{eq:1} gives:
+\[\ip{c_0}{d_0} = \ip{c_1}{d_1} = 1\]
+Whence the Cauchy-Schwarz inequality implies that
+\[\abs{c_i}\abs{d_i} \ge 1 \text{ for } i \in \{0,1\}\]
+Since $D_i$ was unitary in its construction, $\abs{d_i} = 1$ giving
+\begin{equation}\label{eq:2}
+  \abs{c_i}\ge 1
+\end{equation}
+Once again making use of \eqref{eq:1} we find that:
+\[\ip{c_0}{c_0} + \ip{c_1}{c_1} = 2\]
+Which in conjuction with \eqref{eq:2} gives
+\[\abs{c_i} = 1\]
+But the above Cauchy-Schwarz inequality is saturated if and only if the vectors are parallel which implies that $\ket{d_i} = \ket{c_i}$.
+Then:
+\begin{align*}
+  \{D_0,D_1\}\ket{\psi} &= (D_0D_1-D_1D_0)\ket{\psi} \\
+  &= \frac{(C_0-C_1)D_0+(C_0+C_1)D_1}{\sqrt{2}}\ket{\psi} \\
+  &= \frac{(C_0-C_1)(C_0+C_1) + (C_0+C_1)(C_0-C_1)}{\sqrt{2}}\ket{\psi} \\
+  &= 0
+\end{align*}
+Where in the above we have used that $C_i$ commutes with $D_j$ (as they act on different registers) and that $C_i^2 = D_i^2 = \one$.
+Note that by symmetry in the argument the same holds for $\{C_0, C_1\}$.
+
+We next exhibit an explicit local isometry which extracts the state $\ket{\phi^+}$ from this compatible measurement.
+Define the following operators:
+\[Z_C = \frac{1}{\sqrt{2}}(C_0 + C_1), X_C = \frac{1}{\sqrt{2}}(C_0+C_1), Z_D = D_0, X_D = D_1\]
+Notice that by construction $Z_*, X_*$ anticommute.
+By the above anticommutativity argument we have also shown that $Z_C\ket{\psi} = Z_D\ket{\psi}$ and similarly for $X_C, X_D$.
+Note that in our case, since the set of outcomes happened to lie on the unit circle our above operators are in fact unitary.
+For the general case however, one would have to normalize the eigenvalues of some Hermitian operator.
+Consider the following given circuit:
+\begin{center}
+  \includegraphics[scale=1.2]{giraffics/CHSH-swap.pdf}
+\end{center}
+Where a direct calculation using the above listed properties of $Z_*, X_*$ gives the right hand side.
+This above example was described by Mayers and Yao in \cite{mayers2003self}, where they also give the first characterization of self-testing.
+
+\section{Connections to Non-Local Games}
+One might note the implicit connection between the formulation of a self-test and the underlying correlations given by some optimal strategy to a non-local game.
+In particular, work by Slofstra in \cite{slofstra2011lower} associates to each XOR game $\mcG$ a game $C^*$-algebra where optimal strategies winning $\mcG$ correspond to representations of the game $C^*$-algebra.
+The same paper also generalized the CHSH game to higher dimensions and provided similar self-testing protocols as above for higher dimensional maximally entangled qudits.
+
+\section{Extensions of Self-Testing}
+We remarked earlier that it is necessary for the self-testing protocol to be multipartite, as in the unipartite case a lab running an exceptionally powerful simulator can convince any tester of unipartite quantum operations.
+In motivating self-testing as a protocol, however, we wished to be able to prove without examining an experimental setup,
+that the experiment must be doing something quantum.
+It is then of use to be able to verify that an experimenter implementing a quantum circuit (perhaps through a sequence of gates) has correctly done so.
+
+Work done in \cite{magniez2006self} shows that this is indeed possible.
+To do so, Carl and David must be given access to the same physical implementation of the gate.
+For experimental setups, this is not too restrictive of an assumption.
+Suppose then we wish to show that the implementation of some single qubit gate $G$ is experimentally realized by some gate $G'$.
+The protocol is as follows:
+
+In the first step, we perform the Mayers-Yao self-test on some input state $\ket{\psi}$ to prove that it is in fact the maximally entangled state. This verifies both the initial state and the measurements used.
+
+Next, Carl and David both apply the gate $G$ to their halves of the EPR pair. The Mayers-Yao self-test is then done on this state which then ensures that it is indeed a unitary gate on the support of $\ket{\phi^+}$.
+
+Finally, a check that the Mayers-Yao measurements on $G'_C\otimes \one_D \ket{\psi}$ reproduces the same outcomes
+as the theoretical $G_C\otimes \one_D\ket{\phi^+}$.
+
+This protocol can be extended to $n$-qubit gates by having Carl and David share $n$ EPR pairs.
+Briefly, the first step remains the same, and the second and third simply corresponds to performing $n$ Mayers-Yao self-tests on each of the wires simultaneously.
+
+We remark that the ability then to self-test gates then allows one to self-test the implementation of a circuit by simply verifying that each individual gate is implemented correctly.
+
+% \section{Conclusion and Outlook}
+% \label{sec:outlook}
+% \lipsum[1-2]
+
+% \subsubsection*{Acknowledgments}
+
+% Identification of funding sources and other support, and thanks to individuals and groups that assisted in the research and the preparation of the work should be included in an acknowledgment section, which is placed just before the reference section in your document \cite{acmart}.
+
+% %%% ===============================================================================
+% %%% Bibliography
+% %%% ===============================================================================
+
+% In the bibliography, use \texttt{\textbackslash textsuperscript} for \enquote{st}, \enquote{nd}, \ldots:
+% E.g., \enquote{The 2\textsuperscript{nd} conference on examples}.
+% When you use \href{https://www.jabref.org}{JabRef}, you can use the clean up command to achieve that.
+% See \url{https://help.jabref.org/en/CleanupEntries} for an overview of the cleanup functionality.
 
 \renewcommand{\bibsection}{\section*{References}} % requried for natbib to have "References" printed and as section*, not chapter*
 % Use natbib compatbile splncs04nat style.
@@ -999,7 +969,7 @@ See \url{https://help.jabref.org/en/CleanupEntries} for an overview of the clean
 \ \\
 %
 \noindent
-All links were last followed on October 5, 2020.
+% All links were last followed on October 5, 2020.
 
 %%% ===============================================================================
 %\appendix
