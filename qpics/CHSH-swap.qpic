@@ -1,0 +1,26 @@
+PREAMBLE \providecommand{\ket}[1]{\left|#1\right\rangle}
+
+1 W \ket{0}_{C'}
+2 3 W \ket{\psi}_{CD}<
+4 W \ket{0}_{D'}
+
+
+1 H
+2 G $Z_C$ 1 width=15
+
+4 H
+3 G $Z_D$ 4 width=15
+
+1 H 
+4 H
+
+2 G $X_C$ 1 width=15
+3 G $X_D$ 4 width=15
+
+4 2 3 PERMUTE
+
+1 4 END
+
+1 4 >= $\qquad\qquad\ket{\phi^+}_{C'D'}$
+2 3 END
+2 3 >= $\qquad\ket{\xi}_{CD}$
